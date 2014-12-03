@@ -1,0 +1,533 @@
+<style>
+	/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  margin: 20px;
+  line-height: 1; }
+  
+section {
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.clear:after {
+  clear: both;
+  content: " ";
+  display: block;
+  height: 0;
+  zoom: 1; }
+
+html, body {
+  background: #ededed; }
+
+body {
+  font-size: 15px;
+  line-height: 1.4em; }
+
+body, input, textarea {
+  font-family: HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333; }
+
+a {
+  color: #2e80d3;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline; }
+
+div#content {
+  width: 640px;
+  margin: 50px auto 0;
+  position: relative; }
+  div#content > div {
+    float: left; }
+  div#content div#input {
+    width: 300px;
+    margin-right: 40px; }
+  div#content div#output, div#content textarea {
+    width: 288px;
+    height: 390px;
+    border: 1px solid #999;
+    background: #fff;
+    padding: 5px;
+    overflow-y: auto; }
+  div#content textarea {
+    font-family: Monaco, "Courier New", Courier, monospace;
+    font-size: 0.9em;
+    resize: none; }
+  div#content textarea#html-output {
+    display: none; }
+
+span#parser-container {
+  position: absolute;
+  bottom: -32px;
+  left: -2px;
+  color: #444;
+  font-size: 0.8em; }
+
+div#loading {
+  display: none;
+  width: 21px;
+  height: 5px;
+  background: image_url("dots-white.gif") no-repeat;
+  position: absolute;
+  bottom: -23px;
+  left: 340px;
+  -webkit-transition: all 0.1s linear; }
+
+a#toggle-output {
+  font-size: 0.8em;
+  position: absolute;
+  bottom: -27px;
+  right: 0; }
+
+section *, .markdown * {
+  line-height: 1.4em; }
+section mark, .markdown mark {
+  background-color: #fffeca;
+  padding: 0 0.08em; }
+section em, section i, .markdown em, .markdown i {
+  font-style: italic; }
+section strong, section b, .markdown strong, .markdown b {
+  font-weight: bold; }
+section abbr, .markdown abbr {
+  border-bottom: 1px dashed;
+  cursor: help; }
+section small, .markdown small {
+  font-size: 0.8em; }
+section h1, section h2, section h3, section h4, section h5, section h6, .markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
+  margin-bottom: 0.5em; }
+section h1, .markdown h1 {
+  font-size: 170%;
+  font-weight: bold; }
+section h2, .markdown h2 {
+  font-size: 150%;
+  font-weight: bold; }
+section h3, .markdown h3 {
+  color: #555;
+  font-size: 110%;
+  font-weight: bold; }
+section h4, .markdown h4 {
+  color: #777;
+  font-weight: bold; }
+section h5, .markdown h5 {
+  color: #777; }
+section h6, .markdown h6 {
+  color: #777;
+  font-size: 90%; }
+section a, .markdown a {
+  text-decoration: underline; }
+section p, .markdown p {
+  line-height: 1.5em;
+  margin: 0 0 1em; }
+section ul ul, section ol ol, .markdown ul ul, .markdown ol ol {
+  margin-bottom: 0;
+  margin-top: 0; }
+section ul, section ol, .markdown ul, .markdown ol {
+  margin: 0 0 2em 0.5em; }
+  section ul li, section ol li, .markdown ul li, .markdown ol li {
+    margin-left: 1em; }
+section ul li, .markdown ul li {
+  list-style: disc; }
+section ol li, .markdown ol li {
+  list-style: decimal; }
+section blockquote, .markdown blockquote {
+  border-left: 5px solid #ddd;
+  color: #999;
+  margin: 0 0 1em;
+  padding-left: 0.6em; }
+section dt, .markdown dt {
+  font-weight: bold;
+  margin-left: 1em; }
+section dd, .markdown dd {
+  margin-bottom: 1em;
+  margin-left: 2em; }
+section table, .markdown table {
+  margin: 0 0 1em;
+  width: 100%; }
+  section table th, .markdown table th {
+    background: #eee;
+    border-bottom: 1px solid #bbb;
+    padding: 0.2em 1em; }
+  section table td, .markdown table td {
+    border-bottom: 1px solid #ddd;
+    padding: 0.2em 1em; }
+section pre, .markdown pre {
+  background-color: #fff;
+  color: #444;
+  font-family: Courier, monospace;
+  font-size: 0.9em;
+  line-height: 1.5em;
+  margin: 0 0 2em;
+  overflow: auto;
+  padding: 1em; }
+  section pre code, .markdown pre code {
+    background-color: #f8f8ff;
+    border: medium none;
+    font-size: 1em;
+    padding: 0; }
+section code, .markdown code {
+  background-color: #f8f8ff;
+  border: 1px solid #dedede;
+  color: #444;
+  padding: 0 0.2em;
+  font-family: "Bitstream Vera Sans Mono", Courier, monospace;
+  font-size: 0.8em; }
+
+.highlight {
+  background: #fff; }
+  .highlight .c {
+    color: #998;
+    font-style: italic; }
+  .highlight .err {
+    color: #a61717;
+    background-color: #e3d2d2; }
+  .highlight .k, .highlight .o, .highlight .kc, .highlight .kd, .highlight .kp, .highlight .kr {
+    font-weight: bold; }
+  .highlight .cm, .highlight .c1 {
+    color: #998;
+    font-style: italic; }
+  .highlight .cp {
+    color: #999;
+    font-weight: bold; }
+  .highlight .cs {
+    color: #999;
+    font-weight: bold;
+    font-style: italic; }
+  .highlight .gd {
+    color: #000;
+    background-color: #fdd; }
+    .highlight .gd .x {
+      color: #000;
+      background-color: #faa; }
+  .highlight .ge {
+    font-style: italic; }
+  .highlight .gr, .highlight .gt {
+    color: #a00; }
+  .highlight .gh, .highlight .bp {
+    color: #999; }
+  .highlight .gi {
+    color: #000;
+    background-color: #dfd; }
+    .highlight .gi .x {
+      color: #000;
+      background-color: #afa; }
+  .highlight .go {
+    color: #888; }
+  .highlight .gp, .highlight .nn {
+    color: #555; }
+  .highlight .gs {
+    font-weight: bold; }
+  .highlight .gu {
+    color: #aaa; }
+  .highlight .kt {
+    color: #458;
+    font-weight: bold; }
+  .highlight .m {
+    color: #099; }
+  .highlight .s {
+    color: #d14; }
+  .highlight .nb {
+    color: #0086b3; }
+  .highlight .nc {
+    color: #458;
+    font-weight: bold; }
+  .highlight .ni {
+    color: #800080; }
+  .highlight .ne, .highlight .nf {
+    color: #900;
+    font-weight: bold; }
+  .highlight .nt {
+    color: #000080; }
+  .highlight .ow {
+    font-weight: bold; }
+  .highlight .w {
+    color: #bbb; }
+  .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .il {
+    color: #099; }
+  .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx {
+    color: #d14; }
+  .highlight .sr {
+    color: #009926; }
+  .highlight .s1 {
+    color: #d14; }
+  .highlight .ss {
+    color: #990073; }
+  .highlight .na, .highlight .no, .highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+    color: #008080; }
+
+h1 a {
+  text-decoration: none; }
+</style>
+
+<section>
+<h1>Manual Claim API</h1>
+
+<p>Dev URL: <a href="http://dev.etecc.com/dent_guy/admin/modules/api/index.php">http://dev.etecc.com/dent_guy/admin/modules/api/index.php</a><br />
+Live URL: <a href="https://dentguynetwork.com/admin/modules/api/index.php">https://dentguynetwork.com/admin/modules/api/index.php</a></p>
+
+<h2>Auth API</h2>
+
+<p>The auth API returns you a token that is then used in all other API requests.</p>
+
+<p>URL: index.php?controller=auth</p>
+
+<h3>POST variables:</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>string</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<h3>Return</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>admin_id</td>
+<td>int</td>
+</tr>
+<tr>
+<td>token</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<h2>Sending an Auth Token</h2>
+
+<p>Each of the following requests require authentication. That must be sent as a HTTP Header called <code>X-Dash-Token</code>.</p>
+
+<h2>Create Manual API</h2>
+
+<p>URL: index.php?controller=claims&amp;view=create-manual</p>
+
+<h3>POST variables</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>contract_number</td>
+<td>string</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>string</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>string</td>
+</tr>
+<tr>
+<td>product_code</td>
+<td>string</td>
+</tr>
+<tr>
+<td>dealer_code</td>
+<td>string</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>int</td>
+</tr>
+<tr>
+<td>home_phone</td>
+<td>string</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+</tr>
+<tr>
+<td>make</td>
+<td>string</td>
+</tr>
+<tr>
+<td>model</td>
+<td>string</td>
+</tr>
+<tr>
+<td>color</td>
+<td>string</td>
+</tr>
+<tr>
+<td>vin</td>
+<td>string</td>
+</tr>
+<tr>
+<td>year</td>
+<td>int</td>
+</tr>
+<tr>
+<td>facility_name</td>
+<td>string</td>
+</tr>
+<tr>
+<td>facility_phone</td>
+<td>string</td>
+</tr>
+<tr>
+<td>facility_address1</td>
+<td>string</td>
+</tr>
+<tr>
+<td>facility_address2</td>
+<td>string</td>
+</tr>
+<tr>
+<td>facility_city</td>
+<td>string</td>
+</tr>
+<tr>
+<td>facility_state</td>
+<td>string</td>
+</tr>
+<tr>
+<td>facility_zip</td>
+<td>int</td>
+</tr>
+<tr>
+<td>claim_number</td>
+<td>string</td>
+</tr>
+<tr>
+<td>damages</td>
+<td>array</td>
+</tr>
+</tbody></table>
+
+<h4>Damages Array Details</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>style</td>
+<td>convertible, coupe, large_suv, large_truck, sedan, small_truck, small_suv, or van</td>
+</tr>
+<tr>
+<td>finish_type</td>
+<td>painted, machined, hyper silver, amg, polish, chrome, chrome clad, or pvd</td>
+</tr>
+<tr>
+<td>damage_location</td>
+<td>Right Front, Left Front, Right Rear, or Left Rear</td>
+</tr>
+<tr>
+<td>damage_type</td>
+<td>Combo, Cosmetic, Inspection, Polished, Specialty, Specialty Combo, or Straighten</td>
+</tr>
+<tr>
+<td>damage_level</td>
+<td>1/4, 3/4, 1, 1 1/2, 2, 3, 4, 5, 6, 7 - 9, 10 - 12, or 12+</td>
+</tr>
+</tbody></table>
+
+<h2>Claim Info API</h2>
+
+<p>URL: index.php?controller=claims&amp;view=info</p>
+
+<h3>POST variables:</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>claim_id</td>
+<td>int</td>
+</tr>
+</tbody></table>
+
+<h3>Return</h3>
+
+<p>This API returns lots of information about the claim, most of which is irrelevant to your needs. This information is used in our apps. The one variable you need is:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>current_status</td>
+<td>string</td>
+</tr>
+</tbody></table>
+</section>

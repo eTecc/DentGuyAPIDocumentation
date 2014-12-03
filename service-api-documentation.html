@@ -1,0 +1,1086 @@
+<style>
+	/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  margin: 20px;
+  line-height: 1; }
+  
+section {
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.clear:after {
+  clear: both;
+  content: " ";
+  display: block;
+  height: 0;
+  zoom: 1; }
+
+html, body {
+  background: #ededed; }
+
+body {
+  font-size: 15px;
+  line-height: 1.4em; }
+
+body, input, textarea {
+  font-family: HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333; }
+
+a {
+  color: #2e80d3;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline; }
+
+div#content {
+  width: 640px;
+  margin: 50px auto 0;
+  position: relative; }
+  div#content > div {
+    float: left; }
+  div#content div#input {
+    width: 300px;
+    margin-right: 40px; }
+  div#content div#output, div#content textarea {
+    width: 288px;
+    height: 390px;
+    border: 1px solid #999;
+    background: #fff;
+    padding: 5px;
+    overflow-y: auto; }
+  div#content textarea {
+    font-family: Monaco, "Courier New", Courier, monospace;
+    font-size: 0.9em;
+    resize: none; }
+  div#content textarea#html-output {
+    display: none; }
+
+span#parser-container {
+  position: absolute;
+  bottom: -32px;
+  left: -2px;
+  color: #444;
+  font-size: 0.8em; }
+
+div#loading {
+  display: none;
+  width: 21px;
+  height: 5px;
+  background: image_url("dots-white.gif") no-repeat;
+  position: absolute;
+  bottom: -23px;
+  left: 340px;
+  -webkit-transition: all 0.1s linear; }
+
+a#toggle-output {
+  font-size: 0.8em;
+  position: absolute;
+  bottom: -27px;
+  right: 0; }
+
+section *, .markdown * {
+  line-height: 1.4em; }
+section mark, .markdown mark {
+  background-color: #fffeca;
+  padding: 0 0.08em; }
+section em, section i, .markdown em, .markdown i {
+  font-style: italic; }
+section strong, section b, .markdown strong, .markdown b {
+  font-weight: bold; }
+section abbr, .markdown abbr {
+  border-bottom: 1px dashed;
+  cursor: help; }
+section small, .markdown small {
+  font-size: 0.8em; }
+section h1, section h2, section h3, section h4, section h5, section h6, .markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
+  margin-bottom: 0.5em; }
+section h1, .markdown h1 {
+  font-size: 220%;
+  font-weight: bold; }
+section h2, .markdown h2 {
+  font-size: 150%;
+  font-weight: bold; }
+section h3, .markdown h3 {
+  color: #555;
+  font-size: 110%;
+  font-weight: bold; }
+section h4, .markdown h4 {
+  color: #777;
+  font-weight: bold; }
+section h5, .markdown h5 {
+  color: #777; }
+section h6, .markdown h6 {
+  color: #777;
+  font-size: 90%; }
+section a, .markdown a {
+  text-decoration: underline; }
+section p, .markdown p {
+  line-height: 1.5em;
+  margin: 0 0 1em; }
+section ul ul, section ol ol, .markdown ul ul, .markdown ol ol {
+  margin-bottom: 0;
+  margin-top: 0; }
+section ul, section ol, .markdown ul, .markdown ol {
+  margin: 0 0 2em 0.5em; }
+  section ul li, section ol li, .markdown ul li, .markdown ol li {
+    margin-left: 1em; }
+section ul li, .markdown ul li {
+  list-style: disc; }
+section ol li, .markdown ol li {
+  list-style: decimal; }
+section blockquote, .markdown blockquote {
+  border-left: 5px solid #ddd;
+  color: #999;
+  margin: 0 0 1em;
+  padding-left: 0.6em; }
+section dt, .markdown dt {
+  font-weight: bold;
+  margin-left: 1em; }
+section dd, .markdown dd {
+  margin-bottom: 1em;
+  margin-left: 2em; }
+section table, .markdown table {
+  margin: 0 0 1em;
+  width: 100%; }
+  section table th, .markdown table th {
+    background: #eee;
+    border-bottom: 1px solid #bbb;
+    padding: 0.2em 1em; }
+  section table td, .markdown table td {
+    border-bottom: 1px solid #ddd;
+    padding: 0.2em 1em; }
+section pre, .markdown pre {
+  background-color: #fff;
+  color: #444;
+  font-family: Courier, monospace;
+  font-size: 0.9em;
+  line-height: 1.5em;
+  margin: 0 0 2em;
+  overflow: auto;
+  padding: 1em; }
+  section pre code, .markdown pre code {
+    background-color: #f8f8ff;
+    border: medium none;
+    font-size: 1em;
+    padding: 0; }
+section code, .markdown code {
+  background-color: #f8f8ff;
+  border: 1px solid #dedede;
+  color: #444;
+  padding: 0 0.2em;
+  font-family: "Bitstream Vera Sans Mono", Courier, monospace;
+  font-size: 0.8em; }
+
+.highlight {
+  background: #fff; }
+  .highlight .c {
+    color: #998;
+    font-style: italic; }
+  .highlight .err {
+    color: #a61717;
+    background-color: #e3d2d2; }
+  .highlight .k, .highlight .o, .highlight .kc, .highlight .kd, .highlight .kp, .highlight .kr {
+    font-weight: bold; }
+  .highlight .cm, .highlight .c1 {
+    color: #998;
+    font-style: italic; }
+  .highlight .cp {
+    color: #999;
+    font-weight: bold; }
+  .highlight .cs {
+    color: #999;
+    font-weight: bold;
+    font-style: italic; }
+  .highlight .gd {
+    color: #000;
+    background-color: #fdd; }
+    .highlight .gd .x {
+      color: #000;
+      background-color: #faa; }
+  .highlight .ge {
+    font-style: italic; }
+  .highlight .gr, .highlight .gt {
+    color: #a00; }
+  .highlight .gh, .highlight .bp {
+    color: #999; }
+  .highlight .gi {
+    color: #000;
+    background-color: #dfd; }
+    .highlight .gi .x {
+      color: #000;
+      background-color: #afa; }
+  .highlight .go {
+    color: #888; }
+  .highlight .gp, .highlight .nn {
+    color: #555; }
+  .highlight .gs {
+    font-weight: bold; }
+  .highlight .gu {
+    color: #aaa; }
+  .highlight .kt {
+    color: #458;
+    font-weight: bold; }
+  .highlight .m {
+    color: #099; }
+  .highlight .s {
+    color: #d14; }
+  .highlight .nb {
+    color: #0086b3; }
+  .highlight .nc {
+    color: #458;
+    font-weight: bold; }
+  .highlight .ni {
+    color: #800080; }
+  .highlight .ne, .highlight .nf {
+    color: #900;
+    font-weight: bold; }
+  .highlight .nt {
+    color: #000080; }
+  .highlight .ow {
+    font-weight: bold; }
+  .highlight .w {
+    color: #bbb; }
+  .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .il {
+    color: #099; }
+  .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx {
+    color: #d14; }
+  .highlight .sr {
+    color: #009926; }
+  .highlight .s1 {
+    color: #d14; }
+  .highlight .ss {
+    color: #990073; }
+  .highlight .na, .highlight .no, .highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+    color: #008080; }
+
+h1 a {
+  text-decoration: none; }
+</style>
+
+<section>
+<h1>Service API</h1>
+
+<p>Dev URL: <a href="http://dev.etecc.com/admin/modules/api/index.php">http://dev.etecc.com/admin/modules/api/index.php</a><br />
+Live URL: <a href="http://api.dentguynetwork.com/admin/modules/api/index.php">http://api.dentguynetwork.com/admin/modules/api/index.php</a></p>
+
+<h2>Contract Login</h2>
+
+<p>Returns contract and package information<br />
+URL: index.php?controller=contracts</p>
+
+<h3>Post Variables</h3>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>last_name</td>
+<td>string</td>
+</tr>
+<tr>
+<td>agreement_number</td>
+<td>string</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>string</td>
+</tr>
+<tr>
+<td>skin_id</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<h3>Return</h3>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>contract</td>
+<td>array</td>
+</tr>
+<tr>
+<td>package</td>
+<td>array</td>
+</tr>
+</tbody></table>
+
+<h4>Contract Array</h4>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>int</td>
+</tr>
+<tr>
+<td>agreement_num</td>
+<td>string</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>string</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>string</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>string</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+</tr>
+<tr>
+<td>make</td>
+<td>string</td>
+</tr>
+<tr>
+<td>model</td>
+<td>string</td>
+</tr>
+<tr>
+<td>year</td>
+<td>string</td>
+</tr>
+<tr>
+<td>color</td>
+<td>string</td>
+</tr>
+<tr>
+<td>vin</td>
+<td>string</td>
+</tr>
+<tr>
+<td>dealership</td>
+<td>array</td>
+</tr>
+</tbody></table>
+
+<h4>Dealership Array</h4>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<h4>Package Array</h4>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>alloy_wheel</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>bumper</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>burn</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>dent</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>film</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>floor_mat</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>headlight</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>interior</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>key</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>paint</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>puncture</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>rip</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>tail_light</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>tire</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>windshield</td>
+<td>bool</td>
+</tr>
+</tbody></table>
+
+<h2>Vehicle Information API</h2>
+
+<p>Returns make, model, and year for a given VIN<br />
+URL: index.php?controller=contracts&amp;action=vin</p>
+
+<h3>Post Variables</h3>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vin</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<h3>Return</h3>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>info</td>
+<td>array</td>
+</tr>
+</tbody></table>
+
+<h4>Info Array</h4>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>make</td>
+<td>string</td>
+</tr>
+<tr>
+<td>model</td>
+<td>string</td>
+</tr>
+<tr>
+<td>year</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<h2>Service Advisor Information API</h2>
+
+<p>Returns service advisor information for a QR code<br />
+URL: index.php?controller=qr&amp;action=lookup</p>
+
+<h3>Post Variables</h3>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<h3>Return</h3>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>info</td>
+<td>array</td>
+</tr>
+</tbody></table>
+
+<h4>Info Array</h4>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+</tr>
+<tr>
+<td>dept_phone</td>
+<td>string</td>
+</tr>
+<tr>
+<td>dealer_name</td>
+<td>string</td>
+</tr>
+<tr>
+<td>dealer_address</td>
+<td>string</td>
+</tr>
+<tr>
+<td>dealer_city</td>
+<td>string</td>
+</tr>
+<tr>
+<td>dealer_state</td>
+<td>string</td>
+</tr>
+<tr>
+<td>dealer_zip</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<h2>Claims List API</h2>
+
+<p>Returns list of claims for a contract<br />
+URL: index.php?controller=claims</p>
+
+<h3>Post Variables</h3>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agreement_number</td>
+<td>string</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>string</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>string</td>
+</tr>
+<tr>
+<td>skin_id</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<h3>Return</h3>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>items</td>
+<td>array</td>
+</tr>
+</tbody></table>
+
+<h4>Items Array</h4>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>int</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+</tr>
+<tr>
+<td>pending_photo</td>
+<td>string</td>
+</tr>
+<tr>
+<td>created</td>
+<td>string</td>
+</tr>
+<tr>
+<td>damage</td>
+<td>array</td>
+</tr>
+</tbody></table>
+
+<h4>Damage Array</h4>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>int</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+</tr>
+<tr>
+<td>pending_photo</td>
+<td>string</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+</tr>
+<tr>
+<td>location</td>
+<td>string</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+</tr>
+<tr>
+<td>level</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<h2>Upload Image for Damage API</h2>
+
+<p>Upload an image for a damage that is pending photo<br />
+URL: index.php?controller=claims&amp;action=upload-image-for-damage</p>
+
+<h3>Post Variables</h3>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agreement_number</td>
+<td>string</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>string</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>string</td>
+</tr>
+<tr>
+<td>skin_id</td>
+<td>string</td>
+</tr>
+<tr>
+<td>damage_id</td>
+<td>int</td>
+</tr>
+</tbody></table>
+
+<h3>File Data</h3>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>image</td>
+<td>file</td>
+</tr>
+</tbody></table>
+
+<h2>File Claim API</h2>
+
+<p>Upload an image for a damage that is pending photo<br />
+URL: index.php?controller=claims&amp;action=create</p>
+
+<h3>Post Variables</h3>
+
+<table><thead>
+<tr>
+<th width="33%">Name</th>
+<th width="33%">Value</th>
+<th width="33%">Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>client_id</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>skin_id</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>contract</td>
+<td>array</td>
+<td>same as above</td>
+</tr>
+<tr>
+<td>contractChanged</td>
+<td>bool</td>
+<td></td>
+</tr>
+<tr>
+<td>advisor</td>
+<td>array</td>
+<td></td>
+</tr>
+<tr>
+<td>isRequest</td>
+<td>bool</td>
+<td>service request or contract</td>
+</tr>
+<tr>
+<td>damages</td>
+<td>array</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4>Advisor Array</h4>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+</tr>
+<tr>
+<td>deptPhone</td>
+<td>string</td>
+</tr>
+<tr>
+<td>dealershipName</td>
+<td>string</td>
+</tr>
+<tr>
+<td>dealershipAddress</td>
+<td>string</td>
+</tr>
+<tr>
+<td>dealershipCity</td>
+<td>string</td>
+</tr>
+<tr>
+<td>dealershipState</td>
+<td>string</td>
+</tr>
+<tr>
+<td>dealershipZip</td>
+<td>string</td>
+</tr>
+<tr>
+<td>inService</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>roNum</td>
+<td>string</td>
+</tr>
+<tr>
+<td>keyTagName</td>
+<td>string</td>
+</tr>
+<tr>
+<td>from</td>
+<td>unix timestamp</td>
+</tr>
+<tr>
+<td>to</td>
+<td>unix timestamp</td>
+</tr>
+<tr>
+<td>save</td>
+<td>bool</td>
+</tr>
+</tbody></table>
+
+<h4>Damages Array</h4>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>location</td>
+<td>string</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+</tr>
+<tr>
+<td>size</td>
+<td>string</td>
+</tr>
+<tr>
+<td>image</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<h3>File Data</h3>
+
+<table><thead>
+<tr>
+<th width="33%">Name</th>
+<th width="33%">Value</th>
+<th width="33%">Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>image</td>
+<td>array</td>
+<td>array index must match damage index</td>
+</tr>
+</tbody></table>
+
+<h2>Locations API</h2>
+
+<p>Returns list of locations near a latitude and longitude<br />
+URL: index.php?controller=dealerships&amp;action=find-by-location</p>
+
+<h3>Post Variables</h3>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>lat</td>
+<td>string</td>
+</tr>
+<tr>
+<td>long</td>
+<td>string</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>string</td>
+</tr>
+<tr>
+<td>skin_id</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<h3>Return</h3>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>items</td>
+<td>array</td>
+</tr>
+</tbody></table>
+
+<h4>Items Array</h4>
+
+<table><thead>
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>int</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+</tr>
+<tr>
+<td>dealer_code</td>
+<td>string</td>
+</tr>
+<tr>
+<td>address1</td>
+<td>string</td>
+</tr>
+<tr>
+<td>address2</td>
+<td>string</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>string</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>string</td>
+</tr>
+<tr>
+<td>latitude</td>
+<td>string</td>
+</tr>
+<tr>
+<td>longitude</td>
+<td>string</td>
+</tr>
+<tr>
+<td>distance</td>
+<td>string</td>
+</tr>
+</tbody></table>
+</section>
